@@ -13,13 +13,13 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package Netty.singleThreadManyFile1.client;
+package Netty.singleThreadManyFile2;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-
-import Netty.singleThreadManyFile1.Message;
 
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -32,11 +32,11 @@ import io.netty.handler.stream.ChunkedFile;
  * traffic between the echo client and server by sending the first message to
  * the server.
  */
-public class EchoClientHandler extends ChannelInboundHandlerAdapter {
+public class EchoClientHandler2 extends ChannelInboundHandlerAdapter {
 	private String context;
-	private static String path = "F:\\下载";
+	private static String path = "C:\\Users\\Administrator\\Desktop\\cours";
 
-	public EchoClientHandler() {
+	public EchoClientHandler2() {
 	}
 
 	@Override
@@ -70,7 +70,6 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 			for (File files:fileArray) {//循环文件下的所有文件
 				if (files.isDirectory()) {//是否是文件夹
 					System.out.println("文件夹:" + files);
-					
 					Message message = new Message();
 					String directoryName = files.getPath().replace(path,"");//获得相对路径加文件名
 					message.setDirectoryLength(directoryName.getBytes().length);
@@ -89,8 +88,13 @@ public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
 					
 					if (files.length() > 0) {//可读字节大于0，表示没有字节就不进入
+						RandomAccessFile raf = null;
 						try {
-							RandomAccessFile raf = new RandomAccessFile(files.getPath(), "r");
+							raf = new RandomAccessFile(files.getPath(), "r");
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						try {
 							ctx.writeAndFlush(new ChunkedFile(raf)).addListener(new ChannelFutureListener(){
 								@Override
 								public void operationComplete(ChannelFuture future) throws Exception {

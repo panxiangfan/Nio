@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package Netty.singleThreadManyFile1.client;
+package Netty.singleThreadManyFile2;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -35,15 +35,14 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  * traffic between the echo client and server by sending the first message to
  * the server.
  */
-public final class EchoClient {
+public final class EchoClient2 {
 
 	
 	//半包 粘包问题.LineBasedFrameDecoder,DelimiterBasedFrameDecoder,FixedLengthFrameDecoder,ByteToMessageDecoder以及LengthFileldBasedFrameDecoder等等
 	//文件夹传输,多线程--(每个文件使用一个连接)
 	//文件夹传输,使用一个连接()
 	//认证
-
-    static final boolean SSL = System.getProperty("ssl") != null;  //getProperty 获取指定键指示的系统属性。
+    static final boolean SSL = System.getProperty("ssl") != null;
     static final String HOST = System.getProperty("host", "127.0.0.1");
     static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
     static final int SIZE = Integer.parseInt(System.getProperty("size", "256"));
@@ -67,7 +66,7 @@ public final class EchoClient {
              .handler(new ChannelInitializer<SocketChannel>() {
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
-                     ChannelPipeline p = ch.pipeline();//每个通道都有自己的管道，并且在创建新通道时自动创建。
+                     ChannelPipeline p = ch.pipeline();
                      if (sslCtx != null) {
                          p.addLast(sslCtx.newHandler(ch.alloc(), HOST, PORT));
                      }
@@ -75,7 +74,7 @@ public final class EchoClient {
                     		 new ByteArrayEncoder(),
                     		 new ChunkedWriteHandler(),
                     		 new Encoder(),
-                    		 new EchoClientHandler());
+                    		 new EchoClientHandler2());
                  }
              });
             

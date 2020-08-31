@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package Netty.singleThreadManyFile1.server;
+package Netty.singleThreadManyFile2;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -36,11 +36,11 @@ public final class EchoServer {
 
 	public static void main(String[] args) throws Exception {
 
-		EventLoopGroup bossGroup = new NioEventLoopGroup(1);//链接线程池
-		EventLoopGroup workerGroup = new NioEventLoopGroup();//处理线程池
+		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 100)
-				.childHandler( new ChannelInitializer<SocketChannel>() {
+				.childHandler(new ChannelInitializer<SocketChannel>() {
 					@Override
 					public void initChannel(SocketChannel ch) throws Exception {
 						ChannelPipeline p = ch.pipeline();
