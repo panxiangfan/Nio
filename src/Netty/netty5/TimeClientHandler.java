@@ -18,7 +18,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	// 通道激活时触发，当客户端connect成功后，服务端就会接收到这个事件，从而可以把客户端的Channel记录下来，供后面复用
 	public void channelActive(ChannelHandlerContext ctx) {
 		ByteBuf message = null;
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 200; i++) {
 			message = Unpooled.buffer(req.length);
 			message.writeBytes(req);
 			ctx.writeAndFlush(message);

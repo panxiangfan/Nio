@@ -22,7 +22,7 @@ public class TimeClient {
 							ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
 							// ch.pipeline().addLast(new
 							// FixedLengthFrameDecoder(30)); //定长解码器
-							ch.pipeline().addLast(new StringDecoder());
+							ch.pipeline().addLast(new Decord());
 							ch.pipeline().addLast(new TimeClientHandler());
 						}
 					});
@@ -38,6 +38,6 @@ public class TimeClient {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TimeClient().connect(8081, "127.0.0.1");
+		new TimeClient().connect(8088, "127.0.0.1");
 	}
 }

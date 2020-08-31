@@ -39,13 +39,13 @@ public class TimeServer {
 			arg0.pipeline().addLast(new DelimiterBasedFrameDecoder(100,delimiter))*/
 			// arg0.pipeline().addLast(new FixedLengthFrameDecoder(30)); //定长解码器
 			arg0.pipeline().addLast(new LineBasedFrameDecoder(1024)); // 换行符解码器,要是到达1024之后还未匹配到换行符则会抛出异常
-			arg0.pipeline().addLast(new StringDecoder());
+			arg0.pipeline().addLast(new Decord());
 			arg0.pipeline().addLast(new TimeServerHandler());
 		}
 
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TimeServer().bind(8081);
+		new TimeServer().bind(8088);
 	}
 }
