@@ -13,19 +13,19 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package Netty.singleThreadManyFile2;
+package Netty.singleThreadManyFile3.client2;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
+import Netty.singleThreadManyFile3.Message;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.stream.ChunkedFile;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 /**
  * Handler implementation for the echo client. It initiates the ping-pong
@@ -34,7 +34,7 @@ import io.netty.handler.stream.ChunkedFile;
  */
 public class EchoClientHandler2 extends ChannelInboundHandlerAdapter {
 	private String context;
-	private static String path = "C:\\Users\\Administrator\\Desktop\\cours";
+	private static String path = "F:\\壁纸1";
 
 	public EchoClientHandler2() {
 	}

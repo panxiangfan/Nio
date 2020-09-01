@@ -1,45 +1,42 @@
 package Netty.singleThreadManyFile2;
 
-import io.netty.channel.ChannelHandlerContext;
+import java.io.Serializable;
 
-public class Message {
-	private int nameLength;
-	private String name;
-	private long contentLength;
-	private int directoryLength;
-	private String directory;
-	//内容过大不能放在这里面
-	public int getNameLength() {
-		return nameLength;
+/**
+ * @Author xiongdingkun
+ * @Description //TODO Administrator
+ * @Date 21:14 2018/11/14
+ **/
+public class Message implements Serializable {
+	
+	private int filePathLength;
+	private String filePath;
+	private int mark;
+	private long fileLength;
+	public String getFilePath() {
+		return filePath;
 	}
-	public void setNameLength(int nameLength) {
-		this.nameLength = nameLength;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
-	public String getName() {
-		return name;
+	public int getMark() {
+		return mark;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMark(int mark) {
+		this.mark = mark;
 	}
-	public long getContentLength() {
-		return contentLength;
+	public long getFileLength() {
+		return fileLength;
 	}
-	public void setContentLength(long contentLength) {
-		this.contentLength = contentLength;
+	public void setFileLength(long fileLength) {
+		this.fileLength = fileLength;
 	}
-	public String getDirectory() {
-		return directory;
+	public int getFilePathLength() {
+		return filePathLength;
 	}
-
-	public void setDirectory(String directory) {
-		this.directory = directory;
+	public void setFilePathLength(int filePathLength) {
+		this.filePathLength = filePathLength;
 	}
-
-	public int getDirectoryLength() {
-		return directoryLength;
-	}
-
-	public void setDirectoryLength(int directoryLength) {
-		this.directoryLength = directoryLength;
-	}
+	
+	
 }

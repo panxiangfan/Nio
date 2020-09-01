@@ -1,4 +1,4 @@
-package Netty.singleThreadManyFile2;
+package Netty.singleThreadManyFile3;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,15 +9,15 @@ public class Encoder extends MessageToByteEncoder<Message> {
 
 	@Override
 	protected void encode(ChannelHandlerContext ctx, Message message, ByteBuf out) throws Exception {
-		if(message.getMark() == 0){
-			out.writeInt(0);
-			out.writeInt(message.getFilePathLength());
-			out.writeBytes(message.getFilePath().getBytes());
-		}else{
+		if(message.getDirectory() == null){
 			out.writeInt(1);
-			out.writeInt(message.getFilePathLength());
-			out.writeBytes(message.getFilePath().getBytes());
-			out.writeLong(message.getFileLength());
+			out.writeInt(message.getNameLength());
+			out.writeBytes(message.getName().getBytes());
+			out.writeLong(message.getContentLength());
+		}else{//文件夹
+			out.writeInt(0);
+			out.writeInt(message.getDirectoryLength());
+			out.writeBytes(message.getDirectory().getBytes());
 		}
 	}
 }

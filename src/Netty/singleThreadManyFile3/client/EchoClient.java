@@ -13,14 +13,11 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package Netty.singleThreadManyFile2;
+package Netty.singleThreadManyFile3.client;
 
+import Netty.singleThreadManyFile3.Encoder;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -35,7 +32,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  * traffic between the echo client and server by sending the first message to
  * the server.
  */
-public final class EchoClient2 {
+public final class EchoClient {
 
 	
 	//半包 粘包问题.LineBasedFrameDecoder,DelimiterBasedFrameDecoder,FixedLengthFrameDecoder,ByteToMessageDecoder以及LengthFileldBasedFrameDecoder等等
@@ -44,7 +41,7 @@ public final class EchoClient2 {
 	//认证
     static final boolean SSL = System.getProperty("ssl") != null;
     static final String HOST = System.getProperty("host", "127.0.0.1");
-    static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
+    static final int PORT = Integer.parseInt(System.getProperty("port", "8866"));
     static final int SIZE = Integer.parseInt(System.getProperty("size", "256"));
 
     public static void main(String[] args) throws Exception {
@@ -74,7 +71,7 @@ public final class EchoClient2 {
                     		 new ByteArrayEncoder(),
                     		 new ChunkedWriteHandler(),
                     		 new Encoder(),
-                    		 new EchoClientHandler2());
+                    		 new EchoClientHandler());
                  }
              });
             
